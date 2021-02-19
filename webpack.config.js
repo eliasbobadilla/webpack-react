@@ -3,6 +3,11 @@ const path = require('path')
 
 module.exports = {
   mode: 'development', // 'production' | 'development' | 'none'
+  resolve: {
+    alias: {
+      styles: path.resolve(__dirname, './src/styles/'),
+    },
+  },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public'),
