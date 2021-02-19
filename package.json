@@ -4,8 +4,8 @@
   "description": "React App without create-react-app",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server .",
-    "build": "Webpack ."
+    "start": "webpack serve --mode development --history-api-fallback",
+    "build": "webpack"
   },
   "keywords": [
     "webpack-react"
