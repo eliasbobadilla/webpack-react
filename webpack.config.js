@@ -1,30 +1,34 @@
-const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
 
 module.exports = {
-    mode: "development",
-    entry: "./index.js",
-    output: {
-        path: path.resolve(__dirname, "public"),
-        filename: "main.js"
-    },
-    target: "web",
-    devServer: {
-        port: "9500",
-        contentBase: ["./public"],
-        open: true
-    },
-    resolve: {
-        extensions: [".js",".jsx",".json"]
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader"
-                }
-            }
-        ]
-    }
+  mode: 'development', // 'production' | 'development' | 'none'
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'public'),
+    publicPath: '/',
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: [
+              '@babel/plugin-syntax-dynamic-import',
+              ['@babel/plugin-transform-runtime', { regenerator: true }],
+            ],
+          },
+        },
+      },
+    ],
+  },
 }
